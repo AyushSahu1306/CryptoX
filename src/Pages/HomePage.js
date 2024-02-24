@@ -1,9 +1,11 @@
 import React from 'react'
-import { BG_IMG } from '../utils/constant'
+
+import Banner from '../Components/Banner'
 const HomePage = () => {
   return (
     <div >
-      <img src={BG_IMG} className='h-[50vh] w-full object-cover'></img>
+        <Banner/>
+     
     </div>
   )
 }
