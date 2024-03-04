@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { SingleCoin } from '../utils/constant';
+import { HistoricalChart, SingleCoin } from '../utils/constant';
 import { obj } from '../utils/singlecoin';
 import { useSelector } from 'react-redux';
+import Chart from '../Components/Chart';
 
 const CoinPage = () => {
 
@@ -15,11 +16,13 @@ const CoinPage = () => {
   
 
   const fetchcoin=async ()=>{
-    const data2 = await fetch(SingleCoin(coinid));
-    sethistoricdata(data2);
+    const data2 = await fetch(HistoricalChart(coinid,1,"usd"));
+    const data3=await data2.json();
+    sethistoricdata(data3?.prices);
+    // console.log(data3);
     const data = obj;
     // const json=await data.json();
-    // console.log(data);
+  
     setcoin(data);
   }
 
@@ -62,8 +65,8 @@ const CoinPage = () => {
 
       <div className='col-span-6'>
        
+      {historicdata?<Chart Data={historicdata}/>:""}
       </div>
-
     </div>
 
   )
