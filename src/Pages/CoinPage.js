@@ -4,7 +4,8 @@ import { HistoricalChart, SingleCoin } from '../utils/constant';
 import { obj } from '../utils/singlecoin';
 import { useSelector } from 'react-redux';
 import Chart from '../Components/Chart';
-
+import singleChart from '../utils/singleChart';
+import singlecoin from '../utils/singlecoin'
 const CoinPage = () => {
 
   const {coinid}=useParams();
@@ -12,23 +13,38 @@ const CoinPage = () => {
   // console.log(coinid);
   const [historicdata,sethistoricdata]=useState();
 
+  const [days,setDays]=useState(1);
+
   const currency=useSelector((store)=>store.Currency.currency);
   
 
   const fetchcoin=async ()=>{
-    const data2 = await fetch(HistoricalChart(coinid,1,"usd"));
-    const data3=await data2.json();
+    // console.log(days);
+    const data2 = await fetch(HistoricalChart(coinid,days,"usd"));
+    const data3= await data2.json();
+    // const data2=singleChart;
+    // const data3=data2;
+    
     sethistoricdata(data3?.prices);
-    // console.log(data3);
-    const data = obj;
-    // const json=await data.json();
+    console.log(days);
+    console.log(historicdata);
   
-    setcoin(data);
+    const data = await fetch(SingleCoin(coinid));
+    // const data= singlecoin;
+    const json = await data.json();
+    // // const json=await data.json();
+  
+    setcoin(json);
   }
 
   useEffect(()=>{
     fetchcoin();
-  },[])
+  },[days])
+
+  const handleDays=(num)=>{
+    setDays(num);
+  }
+  console.log(days);
 
   return (
     <div className='grid grid-cols-10'>
@@ -65,7 +81,15 @@ const CoinPage = () => {
 
       <div className='col-span-6'>
        
-      {historicdata?<Chart Data={historicdata}/>:""}
+      {historicdata?<Chart Data={historicdata} days={days}/>:""}
+
+          <div className='flex justify-evenly p-4'>
+              <button className={`${days===1 ? "bg-yellow-500 text-black":"bg-transparent text-white" } border-2 border-yellow-400 px-3 py-2 rounded-md`} onClick={()=>handleDays(1)}>24 hours</button>
+              <button className={`${days===30 ? "bg-yellow-500 text-black":"bg-transparent text-white" } border-2 border-yellow-400 px-3 py-2 rounded-md`}  onClick={()=>handleDays(30)}>30 Days</button>
+              <button className={`${days===90 ? "bg-yellow-500 text-black":"bg-transparent text-white" } border-2 border-yellow-400 px-3 py-2 rounded-md`}  onClick={()=>handleDays(90)}>3 Months</button>
+              <button className={`${days===365 ? "bg-yellow-500 text-black":"bg-transparent text-white" } border-2 border-yellow-400 px-3 py-2 rounded-md`}  onClick={()=>handleDays(365)}>1 Year</button>
+          </div>
+         
       </div>
     </div>
 

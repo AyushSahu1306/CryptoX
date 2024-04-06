@@ -3,37 +3,28 @@ import useCoinList from '../hooks/useCoinList'
 import { CoinList } from "../utils/constant";
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-// import AliceCarousel from 'react-alice-carousel';
-import array from '../utils/coins';
 import { Link } from 'react-router-dom';
 
 const CoinsTable = () => {
 
   const [coinlist,setcoinlist]=useState([]);
   const currency=useSelector(store=>store.Currency.currency);
-
-  const [length,setlength]=useState(0);
   const [page,setpage]=useState(1);
   const [number,setnumber]=useState(0);
 
   const fetchCoinList=async ()=>{
-  //   const data =await fetch(CoinList(currency));
-  //   const json = await data.json();
-  //   console.log("hji");
-  //   setcoinlist(json);  
-  //   setnumber((json.length+9)/10);
-  //  if(length==0)  setlength(length+1);
-  setcoinlist(array);
-   setnumber(Math.floor((array.length+9 ) / 10));
+    const data =await fetch(CoinList(currency));
+    const json = await data.json();
+    setcoinlist(json);  
+    setnumber(Math.floor((json.length+9 ) / 10));
 }
 
-useEffect(()=>{
-  if(length==0)  fetchCoinList();
-  // setlength(length+1);
-},[])
+  useEffect(()=>{
+    fetchCoinList();
+  },[currency]);
  
 const handleclick=(e)=>{
-  if(e.target.innerText==='>') {console.log(number); setpage(page+1>=number?number:(page+1));}
+  if(e.target.innerText==='>') setpage(page+1>=number?number:(page+1));
   else if(e.target.innerText==='<')  setpage(page-1<=1?1:(page-1));
   else setpage(e.target.innerText);
 }
@@ -72,6 +63,7 @@ const handleclick=(e)=>{
     <div className="flex mx-[380px] my-2">
       <button onClick={handleclick}>&lt;</button>
       {Array.from({ length: Math.floor((coinlist.length + 9) / 10) }, (_, idx) => (
+        idx+1==page?<button key={idx} className='mx-3 text-lg bg-yellow-400 rounded-[50%] px-2' onClick={handleclick} >{idx+1}</button>:
         <button key={idx} className='mx-3 text-lg' onClick={handleclick}>{idx+1}</button>
       ))}
       <button onClick={handleclick}>&gt;</button>

@@ -10,7 +10,7 @@ const Banner = () => {
             <h1 className='text-7xl font-bold mx-10 my-5'>CryptoX</h1>
             <h2 className='font-light'>Get All The Info Regarding Your Favourite Crypto Currency</h2>
         </div>
-            {/* <Carousel/> */}
+            <Carousel/>
             <CoinsTable/>
     </div>
   )

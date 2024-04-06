@@ -1,4 +1,4 @@
-export const obj=
+  const obj =
 {
   "id": "bitcoin",
   "symbol": "btc",
@@ -4863,3 +4863,5 @@ export const obj=
     }
   ]
 }
+
+export default obj;

@@ -16,7 +16,7 @@ const Header = () => {
         <Link to="/" className='mx-48 mt-5 mb-4 font-bold text-2xl '>CryptoX</Link>
 
         <div className='py-4 px-48'>
-            <select className='bg-gray-900 text-white border-2 rounded-md py-[7px] px-4 mx-4 text-lg' onChange={handleCurrency}>
+            <select className='bg-gray-900 text-white border-2 rounded-md py-[7px] px-4 mx-4 text-lg hover:cursor-pointer' onChange={handleCurrency}>
             <option >INR</option>
             <option>USD</option>
             </select>

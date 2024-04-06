@@ -3,18 +3,14 @@ import AliceCarousel from 'react-alice-carousel';
 import 'react-alice-carousel/lib/alice-carousel.css';
 import { TrendingCoins } from '../utils/constant';
 import { useSelector } from 'react-redux';
-import array from '../utils/coins';
+
 
 
 const Carousel = () => {
   const [items, setItems] = useState([]);
-  const [cnt, setcnt] = useState(0);
+
   const currency=useSelector(store=>store.Currency.currency);
   
-  const [trending,settrending]=useState([]);
-  // console.log(currency);
-
-  // const url="https://api.coingecko.com/api/v3/search/trending";
   
   const fetchTrendingCoins=async ()=>{
     // const url="https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false&locale=en";
@@ -23,7 +19,7 @@ const Carousel = () => {
       
       const json= await data.json();
 
-      const trending=await json||[];
+      const trending = json||[];
       console.log("hi12");
 
       const carouselItems= trending.map((element,index)=>{
@@ -45,28 +41,7 @@ const Carousel = () => {
    fetchTrendingCoins()
     },[currency]);
 
-    // useEffect(()=>{
-    //   settrending(array);
-    //   console.log(trending);
-    //   make();
-    // },[]);
-
-
-    // const make=()=>{
-       
-      // const carouselItems= trending.map((element,index)=>{
-      //          return (
-      //          <div 
-      //            className='mx-[70px]'
-      //            key={index}>
-      //            <img src={element.image} className='w-[70px] h-20 object-cover'></img>
-      //            <h1  className='ml-2'>{ element.name}</h1>
-      //            <h1>{currency=="INR"?"₹" + element.current_price:"$" + element.current_price}</h1>
-      //          </div>)
-      //        });
-       
-      //        setItems(carouselItems);
-    // }
+   
 
 
   return (
