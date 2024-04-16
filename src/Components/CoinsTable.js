@@ -42,7 +42,7 @@ const handleclick=(e)=>{
             <p className='col-span-2 ml-12'>Market Cap</p>
         </div>
       
-        {coinlist.slice(page*10-10,page*10).map((element)=>{
+        {coinlist && coinlist.slice(page*10-10,page*10).map((element)=>{
         return (
           <Link to={"/coin/"+element.id} className='grid grid-cols-12  text-white p-4 text-[16px] border-b border-gray-300 text-2xl '>
             <div className='col-span-7 flex'>

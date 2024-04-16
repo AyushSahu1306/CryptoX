@@ -5,7 +5,7 @@ import HomePage from './Pages/HomePage';
 import CoinPage from './Pages/CoinPage';
 import { Provider } from 'react-redux';
 import appStore from './utils/appStore';
-
+import Login from './Pages/Login';
 
 
 
@@ -19,7 +19,8 @@ function App() {
     <div className="bg-gray-950 text-white min-h-screen">
       <Header/>
         <Routes>
-        <Route path='/' Component={HomePage} exact/>
+        <Route path='/' Component={Login} exact/>
+        <Route path='/home' Component={HomePage} exact/>
         <Route path='/coin/:coinid' Component={CoinPage}/>
         </Routes>
     </div>

@@ -6,10 +6,11 @@ import { useSelector } from 'react-redux';
 import Chart from '../Components/Chart';
 import singleChart from '../utils/singleChart';
 import singlecoin from '../utils/singlecoin'
+import { ImSpinner2 } from "react-icons/im";
 const CoinPage = () => {
 
   const {coinid}=useParams();
-  const [coin,setcoin]=useState({});
+  const [coin,setcoin]=useState();
   // console.log(coinid);
   const [historicdata,sethistoricdata]=useState();
 
@@ -20,7 +21,7 @@ const CoinPage = () => {
 
   const fetchcoin=async ()=>{
     // console.log(days);
-    const data2 = await fetch(HistoricalChart(coinid,days,"usd"));
+    const data2 = await fetch(HistoricalChart(coinid,days,currency));
     const data3= await data2.json();
     // const data2=singleChart;
     // const data3=data2;
@@ -39,7 +40,7 @@ const CoinPage = () => {
 
   useEffect(()=>{
     fetchcoin();
-  },[days])
+  },[days,currency]);
 
   const handleDays=(num)=>{
     setDays(num);
@@ -51,7 +52,7 @@ const CoinPage = () => {
 
       <div className='col-span-3 border-r-2 border-r-gray-700  text-justify p-4'>
 
-         
+        {coin ? <div>
           <img src={coin?.image?.large} className='m-auto w-[200px]' ></img>
           <p className='mx-[135px] my-4 text-5xl font-bold'>{coin.localization?.en}</p>
           <p className='leading-8 text-xl'>{coin?.description?.en.split('.')[0]}.</p>
@@ -77,11 +78,13 @@ const CoinPage = () => {
 
           <button className='bg-yellow-600 text-black px-[130px] py-2 rounded-md text-xl font-light'>Add to Watchlist</button>
 
+        </div>:<ImSpinner2 className='text-8xl animate-spin text-yellow-300 m-auto my-[40vh]'/>}
+
       </div>
 
-      <div className='col-span-6'>
-       
-      {historicdata?<Chart Data={historicdata} days={days}/>:""}
+       <div className='col-span-6'>
+      {historicdata?<div >
+      <Chart Data={historicdata} days={days}/>
 
           <div className='flex justify-evenly p-4'>
               <button className={`${days===1 ? "bg-yellow-500 text-black":"bg-transparent text-white" } border-2 border-yellow-400 px-3 py-2 rounded-md`} onClick={()=>handleDays(1)}>24 hours</button>
@@ -90,7 +93,10 @@ const CoinPage = () => {
               <button className={`${days===365 ? "bg-yellow-500 text-black":"bg-transparent text-white" } border-2 border-yellow-400 px-3 py-2 rounded-md`}  onClick={()=>handleDays(365)}>1 Year</button>
           </div>
          
-      </div>
+      </div>:<ImSpinner2 className='text-8xl animate-spin text-yellow-300 m-auto my-[40vh]'/>}
+         </div>
+
+      
     </div>
 
   )

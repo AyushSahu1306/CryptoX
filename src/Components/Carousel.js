@@ -19,8 +19,8 @@ const Carousel = () => {
       
       const json= await data.json();
 
-      const trending = json||[];
-      console.log("hi12");
+      const trending = json || [];
+      // console.log("hi12");
 
       const carouselItems= trending.map((element,index)=>{
         return (
