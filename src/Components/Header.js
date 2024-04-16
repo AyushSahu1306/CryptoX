@@ -3,23 +3,24 @@ import { useDispatch } from 'react-redux'
 import { Link, useLocation } from 'react-router-dom'
 import { changeCurrency } from '../utils/currencySlice';
 import { useNavigate } from 'react-router-dom';
+import {auth} from '../utils/firebase';
 import { signOut } from 'firebase/auth';
-import { auth } from '../utils/firebase';
 import { removeUser } from '../utils/userSlice';
 
 const Header = () => {
   const location = useLocation();
-  // console.log(location.pathname)
+ 
   const navigate=useNavigate();
 
   const dispatch = useDispatch();
+  
   const handleCurrency=(e)=>{
     dispatch(changeCurrency(e.target.value));
   }
 
 
   const handleSignout=()=>{
-   console.log("hello")
+  //  console.log("hello")
     signOut(auth).then(() => {
       // Sign-out successful.
       dispatch(removeUser());

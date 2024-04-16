@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import useCoinList from '../hooks/useCoinList'
 import { CoinList } from "../utils/constant";
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';

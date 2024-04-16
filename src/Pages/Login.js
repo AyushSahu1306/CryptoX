@@ -1,8 +1,8 @@
 //rafce
 import React, { useRef, useState,useEffect } from 'react'
+import {auth} from "../utils/firebase";
 import {checkValidData} from "../utils/validate"
 import { createUserWithEmailAndPassword,signInWithEmailAndPassword,updateProfile,onAuthStateChanged} from "firebase/auth";
-import {auth} from "../utils/firebase"
 import { useNavigate } from 'react-router-dom';
 import { useDispatch,useSelector } from 'react-redux';
 import { addUser,removeUser } from '../utils/userSlice';
@@ -17,6 +17,10 @@ const Login = () => {
   const name =useRef(null);
   const email= useRef(null);
   const password= useRef(null);
+
+  // const [popup,setpopup]=useState(false);
+  // const dispatch = useDispatch();
+  // const user=useSelector(store=>store.user);
 
   const toggleSignInForm=()=>{
     setisSigninForm(!isSignInForm);
@@ -80,9 +84,7 @@ const Login = () => {
   }
  
 
-  const [popup,setpopup]=useState(false);
-  // const dispatch = useDispatch();
-  const user=useSelector(store=>store.user);
+  
 
  
 

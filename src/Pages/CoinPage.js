@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { HistoricalChart, SingleCoin } from '../utils/constant';
-import { obj } from '../utils/singlecoin';
+
 import { useSelector } from 'react-redux';
 import Chart from '../Components/Chart';
-import singleChart from '../utils/singleChart';
-import singlecoin from '../utils/singlecoin'
+
 import { ImSpinner2 } from "react-icons/im";
 const CoinPage = () => {
 
